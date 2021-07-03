@@ -10,6 +10,12 @@ export class BooksController {
         private booksService: BooksService
     ) { }
 
+    /**
+     * @description Add a book to the library 
+     * @param createBookDto 
+     * @param res 
+     * @returns 
+     */
     @Post('book/add')
     async create(@Body() createBookDto: CreateBookDto, @Res() res) {
         try {
@@ -25,6 +31,13 @@ export class BooksController {
         }
     }
 
+    /**
+     * @description Update book details
+     * @param uuid 
+     * @param updateBookDto 
+     * @param res 
+     * @returns 
+     */
     @Put('book/:uuid/update')
     async update(@Param('uuid') uuid: string, @Body() updateBookDto: UpdateBookDto, @Res() res) {
         const output = await this.booksService.update(uuid, updateBookDto);
@@ -39,6 +52,12 @@ export class BooksController {
         });
     }
 
+    /**
+     * @description Delete a book from the library
+     * @param uuid 
+     * @param res 
+     * @returns 
+     */
     @Delete('book/:uuid')
     async delete(@Param('uuid') uuid: string, @Res() res) {
         const output = await this.booksService.delete(uuid);
@@ -52,6 +71,11 @@ export class BooksController {
         });
     }
 
+    /**
+     * @description Get all books
+     * @param res 
+     * @returns 
+     */
     @Get('books')
     async findAll(@Res() res) {
         const output = await this.booksService.findAll();
@@ -66,6 +90,12 @@ export class BooksController {
         });
     }
 
+    /**
+     * @description Get book details
+     * @param uuid 
+     * @param res 
+     * @returns 
+     */
     @Get('book/:uuid')
     async findOne(@Param('uuid') uuid: string, @Res() res) {
         const output = await this.booksService.findOne(uuid);
